@@ -6,7 +6,7 @@ from __future__ import (
 
 import arrow
 import click
-from functools32 import lru_cache
+from functools import lru_cache
 from jira import JIRAError
 
 from openedx_webhooks.jira.tasks import update_latest_github_activity

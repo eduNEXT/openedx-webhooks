@@ -5,12 +5,12 @@ Generic utilities.
 
 from __future__ import print_function, unicode_literals
 
+import functools
 import hmac
 import os
 import sys
 from hashlib import sha1
 
-import functools32
 import requests
 from flask import request, Response
 from functools import wraps
@@ -215,7 +215,7 @@ _memoized_functions = []
 
 def memoize(func):
     """Cache the value returned by a function call."""
-    func = functools32.lru_cache()(func)
+    func = functools.lru_cache()(func)
     _memoized_functions.append(func)
     return func
 

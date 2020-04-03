@@ -7,7 +7,7 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
-from functools32 import lru_cache
+from functools import lru_cache
 
 from ..lib.edx_repo_tools_data.utils import get_people as _get_people
 from ..lib.exceptions import NotFoundError

@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_sslify import SSLify
 from raven.contrib.celery import register_logger_signal, register_signal
 from raven.contrib.flask import Sentry
-from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 reload(sys)
 sys.setdefaultencoding('utf-8')

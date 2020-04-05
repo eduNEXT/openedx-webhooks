@@ -94,9 +94,7 @@ def issue_created():
     try:
         event = request.get_json()
     except ValueError:
-        raise ValueError("Invalid JSON from JIRA: {data}".format(
-            data=request.data.decode('utf-8')
-        ))
+        raise ValueError("Invalid JSON from JIRA: {data}".format(data=request.data))
     sentry.client.extra_context({"event": event})
 
     if current_app.debug:
@@ -292,9 +290,7 @@ def issue_updated():
     try:
         event = request.get_json()
     except ValueError:
-        raise ValueError("Invalid JSON from JIRA: {data}".format(
-            data=request.data.decode('utf-8')
-        ))
+        raise ValueError("Invalid JSON from JIRA: {data}".format(data=request.data))
     sentry.client.extra_context({"event": event})
 
     if current_app.debug:

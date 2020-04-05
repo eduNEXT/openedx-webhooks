@@ -226,7 +226,7 @@ def clear_memoized_values():
 
 
 def to_unicode(s):
-    if isinstance(s, unicode):
+    if isinstance(s, str):
         return s
     return s.decode('utf-8')
 

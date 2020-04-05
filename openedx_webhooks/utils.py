@@ -42,7 +42,7 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-def is_valid_payload(secret, signature, payload):
+def is_valid_payload(secret: str, signature: str, payload: bytes) -> bool:
     """
     Ensure payload is valid according to signature.
 
@@ -53,14 +53,14 @@ def is_valid_payload(secret, signature, payload):
         secret (str): The shared secret
         signature (str): Signature as calculated by the server, sent in
             the request
-        payload (str): The request payload
+        payload (bytes): The request payload
 
     Returns:
         bool: Is the payload legit?
     """
-    mac = hmac.new(str(secret), msg=payload, digestmod=sha1)
+    mac = hmac.new(secret.encode(), msg=payload, digestmod=sha1)
     digest = 'sha1=' + mac.hexdigest()
-    return hmac.compare_digest(str(digest), str(signature))
+    return hmac.compare_digest(digest.encode(), signature.encode())
 
 
 def pop_dict_id(d):

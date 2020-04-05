@@ -15,7 +15,7 @@ from openedx_webhooks.utils import is_valid_payload
 def _make_signature(secret, payload):
     return (
         'sha1=' +
-        hmac.new(str(secret), msg=payload, digestmod=sha1).hexdigest()
+        hmac.new(secret.encode(), msg=payload, digestmod=sha1).hexdigest()
     )
 
 
@@ -31,7 +31,7 @@ def secret2():
 
 @pytest.fixture
 def payload():
-    return json.dumps('payload')
+    return json.dumps('payload').encode("utf8")
 
 
 @pytest.fixture
@@ -53,5 +53,5 @@ def test_bad_secret(secret2, signature, payload):
 
 
 def test_mismatched_payload(secret1, signature):
-    wrong_payload = json.dumps('x')
+    wrong_payload = json.dumps('x').encode("utf8")
     assert is_valid_payload(secret1, signature, wrong_payload) is False

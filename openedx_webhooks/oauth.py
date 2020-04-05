@@ -5,7 +5,7 @@ import os
 
 from flask import flash, request
 from flask_dance.consumer import oauth_authorized, oauth_error
-from flask_dance.consumer.backend.sqla import SQLAlchemyBackend
+from flask_dance.consumer.storage.sqla import SQLAlchemyStorage
 from flask_dance.contrib.github import make_github_blueprint
 from flask_dance.contrib.jira import make_jira_blueprint
 
@@ -21,7 +21,7 @@ jira_bp = make_jira_blueprint(
     rsa_key=os.environ.get("JIRA_OAUTH_RSA_KEY"),
     # these are actually necessary
     base_url="https://openedx.atlassian.net",
-    backend=SQLAlchemyBackend(OAuth, db.session),
+    storage=SQLAlchemyStorage(OAuth, db.session),
 )
 
 
@@ -42,7 +42,7 @@ def jira_error(blueprint, message, response=None):
 
 github_bp = make_github_blueprint(
     scope="admin:repo_hook,repo,user",
-    backend=SQLAlchemyBackend(OAuth, db.session),
+    storage=SQLAlchemyStorage(OAuth, db.session),
 )
 
 

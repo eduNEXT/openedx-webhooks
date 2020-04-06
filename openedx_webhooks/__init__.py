@@ -22,7 +22,7 @@ rootLogger.setLevel(logging.INFO)
 
 sentry = Sentry()
 db = SQLAlchemy()
-celery = Celery()
+celery = Celery(strict_typing=False)
 
 
 def expand_config(name=None):
